@@ -122,13 +122,13 @@ if __name__ == "__main__":
                 print(f"Epoch [{epoch}/{EPOCHS}] Step [{i+1}/{len(loader)}] "
                     f"Loss_D: {loss_D.item():.4f} Loss_G: {loss_G.item():.4f}"
                     )
-    with torch.no_grad():
-        samples = G(fixed_noise).cpu()
-        grid = make_grid(samples, nrow=6, normalize=True, value_range=(-1, 1))
-        save_image(grid, os.path.join(OUT_DIR, f"epoch_{epoch:02d}.png"))        
-        
-    torch.save(G.state_dict(), os.path.join(OUT_DIR, f"G_epoch_{epoch}.pth"))
-    torch.save(D.state_dict(), os.path.join(OUT_DIR, f"D_epoch_{epoch}.pts"))
+        with torch.no_grad():
+            samples = G(fixed_noise).cpu()
+            grid = make_grid(samples, nrow=6, normalize=True, value_range=(-1, 1))
+            save_image(grid, os.path.join(OUT_DIR, f"epoch_{epoch:02d}.png"))        
+            
+        torch.save(G.state_dict(), os.path.join(OUT_DIR, f"G_epoch_{epoch}.pth"))
+        torch.save(D.state_dict(), os.path.join(OUT_DIR, f"D_epoch_{epoch}.pth"))
 
     print("Entrenamiento finalizado. Imágenes y chekpoints en: ", OUT_DIR)
 
